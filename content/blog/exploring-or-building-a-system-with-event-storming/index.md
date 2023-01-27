@@ -15,9 +15,9 @@ tags:
 Event storming is a method by which a team of people can model a business process.  This process may be as simple as making a peanut and jelly sandwich or as complex as managing multi-million dollar bank transactions.  At its foundation, it's all about modeling something, but the degree to which we model it can produce different outcomes.  Also, the tools that we employ while executing the event storm, can get us a higher fidelity model to help produce those outcomes. In this blog we will explore how we can use the event storming to achieve different things, and the tools needed to do that.
 
 ## Tools of event storming
-Anyone who as been at an event storm knows that, by the end, there is a massive pile of stickies of all the colors of the rainbow.  Each of these stickies represents something different in the process.  On their own, they arent all that useful, but when placed on a board, wall, or window in a particular order, you end up with a modeled process that can help you make huge decisions.  We will cover many of these stickies, we will call them tools, throughout this article.  Each building on the last to provide a higher fidelity model, and perhaps, driving you to a different outcome. 
+Anyone who as been at an event storm knows that, by the end, there is a massive pile of stickies of all the colors of the rainbow.  Each of these stickies represents something different in the process.  On their own, they aren't all that useful, but when placed on a board, wall, or window in a particular order, you end up with a modeled process that can help you make huge decisions.  We will cover many of these stickies, we will call them tools, throughout this article.  Each building on the last to provide a higher fidelity model, and perhaps, driving you to a different outcome. 
 
-**To the sandwich-storm!:**
+In the following sections you will see **To the sandwich-storm!**, where we will give an example of the tool in the context of the making a peanut butter and jelly sandwich event storm.
 
 ### Events 
 Events are the foundational tool of event storming, thus the name.  No matter the purpose of the event storm, you are at least going to do these.  By writing events and placing them on the board in timeline order, we can see the things that happen in the system, and the temporal relationship between them.  Participants of the event storm will spend a considerable amount of time writing these events down and determining where they go in the continuum. Here are some additional characteristics of events.  
@@ -53,32 +53,41 @@ Depicting external systems on a event storm helps to define boundaries of event 
 
 **To the sandwich-storm!:** We may choose to make the grocery store an external system.  If we didn't and wanted to create a complete model, we would need to model how the grocery store worked from getting a cart, to adding things to that cart, to checking out and everything in between.  By making it an external system we only need to care about the commands going into the external system "buy peanut butter" and the events coming out of it "peanut butter purchased".
 
-### Aggregates
-
-* Aggregates are the nouns in the business process and systems
-* Aggregates are affected by recording *Events* in a time series
-* A time series of *Events* can be used to show state of the Aggegate at any point in time
-* A *Bounded Context* typically is wrapped an Aggregate
-* A *Bounded Context* governs what/who can affect that Aggregate
-
-**To the sandwich-storm!:**
-
 ### Policy
 Policies are manual or automated actions or sets of actions that are repeatable.  A common way to identify policies is by saying if-this-then-that.  Given the same event input or trigger, the same command or commands would be invoked.  
 
 **To the sandwich-storm!:** If the unimaginable happens, and you get a "peanut butter retrieval failed" event as depicted earlier.  There is something we must always do in order to rectify the situation, and that is to "purchase peanut butter".  Therefor the policy (or if-this-then-that) will be if "peanut butter retrieval failed"(event) then "purchase peanut butter"(command).
 
-### Read model
-
-**To the sandwich-storm!:**
-
 ### Actors (Users, time, )
+Actors are one of the things that can issue commands.  Actors are more generally anything that acts on the process or system.  The most common types of actors are users, groups of users, or time.  
 
-**To the sandwich-storm!:**
+**To the sandwich-storm!:** There are a couple different kind of actors we can talk about here. The first is the obvious one which is you.  You are the one issuing many of the commands in the process of making your sandwich, so you are an actor.  The second is less obvious, and I'm going to stretch a bit to explain it.  Let's say that someone in your life taught you to freeze your bread and defrost individual slices before making a sandwich.  You may have a command to "thaw bread", and the actor would be time. 
+
+### Read model
+Read models are created by events and their details and are used by actors to issue commands.  In software, read models often manifest as user interfaces.  However, in processes these could be 
+
+**To the sandwich-storm!:**  Let us assume for a minute that we want to precisely recreate this peanut and jelly sandwich in the future.  In order to do that we must ensure that the types of ingredients, the quantities of those ingredients, and the application of them are precisely recorded, recorded in a recipe.  This recipe would be informed by the details of the events (type of bread in the "bread selected" event, amount of peanut butter in the "peanut butter" spread event) and it would inform a read model for future you or someone else to recreate what was done.   
+
+### Aggregates
+If you reach this point you are likely trying to define a system architecture for your process. The concepts of an aggregate can be highly technical.  At its foundation though, it is something that is issued commands, and produces events.  
+
+* Aggregates are the nouns in the business process and systems
+* Aggregates are affected by recording *Events* in a time series
+* A time series of *Events* can be used to show state of the Aggegate at any point in time
+
+**To the sandwich-storm!:** The analogy starts to break down with aggregates because we likely would not be writing an event-driven computer program to make a sandwich.  However, if we think about the objects in the system that are issued commands and produces events, we may see that things like "peanut butter jar", "knife", and "bread" could be considered aggregates.   
+
+### Entities
+NOTE: Should we go to this level? 
+
+### Value objects
+NOTE: Should we go to this level?
 
 ### Bounded contexts
+* A *Bounded Context* typically is wrapped an Aggregate
+* A *Bounded Context* governs what/who can affect that Aggregate
 
-**To the sandwich-storm!:**
+**To the sandwich-storm!:** The bounded context for this process is my kitchen.  The purpose and meaning of words like knife and bread are different in different bounded contexts.
 
 ### Additional Tools that could be employed
 #### SNAP Analysis
